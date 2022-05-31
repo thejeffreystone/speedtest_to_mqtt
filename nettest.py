@@ -18,6 +18,7 @@ app_mode = os.getenv("app_mode")
 interval = int(os.getenv("interval"))
 broker = os.getenv("broker")
 port = int(os.getenv("port"))
+topic = os.getenv("topic")
 user = os.getenv("user")
 password = os.getenv("password")
 # Splunk env:
@@ -103,7 +104,7 @@ def publishToMqtt(test, speed):
 	paho.username_pw_set(user, password=password)                           
 	paho.on_publish = on_publish                         
 	paho.connect(broker,port)                                 
-	ret= paho.publish("house/speedtest/{}".format(test),speed) 
+	ret= paho.publish(topic+"{}".format(test),speed) 
 	paho.disconnect()
 
 def main(interval):
