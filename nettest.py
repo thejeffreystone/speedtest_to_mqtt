@@ -21,7 +21,7 @@ port = int(os.getenv("port"))
 topic = os.getenv("topic")
 user = os.getenv("user")
 password = os.getenv("password")
-test_server = [int(os.getenv("test_server"))]
+test_server = [] if os.getenv("test_server") == "False" else int(os.getenv("test_server"))
 # Splunk env:
 http_event_collector_key = os.getenv("splunk_hec_key")
 http_event_collector_host = os.getenv("splunk_server")

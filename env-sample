@@ -6,7 +6,11 @@ port=1883
 user=mqtt
 password=secretpw
 topic=house/speedtest/
-test_server=16611 #(Vereinigte Stadtwerke Media GmbH (Bad Oldesloe) - get your id like so: https://www.hivelocity.net/kb/how-to-use-hivelocitys-speedtest-servers-with-speedtest-cli/)
+
+# Speedtest
+# (Vereinigte Stadtwerke Media GmbH (Bad Oldesloe) - get your id like so: https://www.hivelocity.net/kb/how-to-use-hivelocitys-speedtest-servers-with-speedtest-cli/)
+# Set to False for auto best server
+test_server=16611
 
 # Interval, in seconds, you want to run the updates. 3600 = 1 hour. Set inteval to 0 if you want to the script to exit after one run.  
 interval=14400
