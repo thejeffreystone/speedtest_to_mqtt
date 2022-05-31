@@ -11,9 +11,7 @@ This script was written to provide network speedtest results to a MQTT sensor in
 * Install the app by cloning this repo
  - `git clone https://github.com/thejeffreystone/speedtest_to_mqtt`
 * Install the required python libraries:
- - `pip install paho-mqtt`
- - `pip install speedtest-cli`
- - `pip install python-dotenv`
+ - `pip install -r requirements.txt`
 * Edit the env-sample and saved as .env
 
 ## How To Use
