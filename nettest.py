@@ -71,13 +71,14 @@ def testDownSpeed():
 	start = time.time()
 	speedtester = speedtest.Speedtest()
 	speedtester.get_servers(test_server)
-	speedtester.get_best_server()
+	best_server = speedtester.get_best_server()
 	speed = round(speedtester.download() / 1000 / 1000)
 	end = time.time()
 	total_elapsed_time = (end - start)
 	if app_mode == 'debug':
 		print("Publishing Download result {} to MQTT...".format(speed))
 	publishToMqtt('down', speed)
+	publishToMqtt('name', best_server["sponsor"])
 	if http_event_collector_key:
 		splunkIt('download',speed,total_elapsed_time)
 
