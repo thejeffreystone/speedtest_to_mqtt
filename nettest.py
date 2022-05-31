@@ -13,7 +13,7 @@ import json
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
 # set custom .env file-path if your file isn't found
-find_dotenv("./env-sample.env")
+load_dotenv("./env-sample.env")
 
 app_mode = os.getenv("app_mode")
 interval = int(os.getenv("interval"))
