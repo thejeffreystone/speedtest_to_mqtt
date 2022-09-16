@@ -1,3 +1,18 @@
+== This Project was moved to Codeberg ==
+
+GitHub is a proprietary, trade-secret system that is not Free and Open Souce Software
+(FOSS). We urge you to read about the
+[Give up GitHub](https://GiveUpGitHub.org) campaign from
+[the Software Freedom Conservancy](https://sfconservancy.org) to understand
+some of the reasons why GitHub is not a good place to host FOSS projects.
+
+Any use of this project's code by GitHub Copilot, past or present, is done
+without our permission.  We do not consent to GitHub's use of this project's
+code in Copilot.
+
+![Logo of the GiveUpGitHub campaign](https://sfconservancy.org/img/GiveUpGitHub.png)
+
+
 # Speedtest to MQTT
 
 This script was written to provide network speedtest results to a MQTT sensor in the [HomeAssistant](https://home-assistant.io) home automation platform. As expected the python speedtest-cli is resource intensive which makes the idea of running it on a system other than your main [HomeAssistant](https://home-assistant.io) a good idea. Not to mention if you are running [HomeAssistant](https://home-assistant.io) on a RaspberryPi you may be constrained by the Pi's network adapter. 
