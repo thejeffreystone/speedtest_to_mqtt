@@ -12,14 +12,17 @@ import time
 import json
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
-load_dotenv()
+# set custom .env file-path if your file isn't found
+load_dotenv("./env-sample.env")
 
 app_mode = os.getenv("app_mode")
 interval = int(os.getenv("interval"))
 broker = os.getenv("broker")
 port = int(os.getenv("port"))
+topic = os.getenv("topic")
 user = os.getenv("user")
 password = os.getenv("password")
+test_server = [] if os.getenv("test_server") == "False" else [int(os.getenv("test_server"))]
 # Splunk env:
 http_event_collector_key = os.getenv("splunk_hec_key")
 http_event_collector_host = os.getenv("splunk_server")
@@ -67,14 +70,15 @@ def testDownSpeed():
 		print("Starting Download test...")
 	start = time.time()
 	speedtester = speedtest.Speedtest()
-	speedtester.get_servers([16611])
-	speedtester.get_best_server()
+	speedtester.get_servers(test_server)
+	best_server = speedtester.get_best_server()
 	speed = round(speedtester.download() / 1000 / 1000)
 	end = time.time()
 	total_elapsed_time = (end - start)
 	if app_mode == 'debug':
 		print("Publishing Download result {} to MQTT...".format(speed))
 	publishToMqtt('down', speed)
+	publishToMqtt('name', best_server["sponsor"])
 	if http_event_collector_key:
 		splunkIt('download',speed,total_elapsed_time)
 
@@ -84,7 +88,7 @@ def testUpSpeed():
 		print("Starting Upload test...")
 	start = time.time()
 	speedtester = speedtest.Speedtest()
-	speedtester.get_servers([16611])
+	speedtester.get_servers(test_server)
 	speedtester.get_best_server()
 	speed = round(speedtester.upload() / 1000 / 1000)
 	end = time.time()
@@ -103,7 +107,7 @@ def publishToMqtt(test, speed):
 	paho.username_pw_set(user, password=password)                           
 	paho.on_publish = on_publish                         
 	paho.connect(broker,port)                                 
-	ret= paho.publish("house/speedtest/{}".format(test),speed) 
+	ret= paho.publish(topic+"{}".format(test),speed) 
 	paho.disconnect()
 
 def main(interval):
